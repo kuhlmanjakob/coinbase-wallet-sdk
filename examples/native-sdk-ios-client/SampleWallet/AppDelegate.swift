@@ -66,7 +66,7 @@ extension AppDelegate: UIAlertViewDelegate {
             )
             sender = self.peerPublicKey ?? requestMessage.sender
         } else {
-            let returnValues: [ReturnValue]
+            let returnValues: [ResponseContent.Value]
             switch requestMessage.content {
             case let .handshake(appId, callback, initialActions):
                 self.peerPublicKey = requestMessage.sender
@@ -75,7 +75,7 @@ extension AppDelegate: UIAlertViewDelegate {
                     .result(value: "0x571a6a108adb08f9ca54fe8605280F9EE0eD4AF6")
                 ]
             case let .request(actions, account):
-                let error = ReturnValue.error(code: 713, message: "New CBWallet app will be able to actually handle those requests")
+                let error = ResponseContent.Value.error(code: 713, message: "New CBWallet app will be able to actually handle those requests")
                 returnValues = actions.map({ _ in error })
             }
             
