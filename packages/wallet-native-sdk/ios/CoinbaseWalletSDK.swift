@@ -92,6 +92,23 @@ public final class CoinbaseWalletSDK {
             timestamp: Date()
         )
         self.send(message) { result in
+            let account: Account?
+            
+            switch initialActions?.first?.method {
+            case "eth_requestAccounts":
+                guard let address = try? result.get().content.first?.get() else {
+                    account = nil
+                    break
+                }
+                account = Account(chain: "eth", networkId: 1, address: address)
+            default:
+                account = nil
+            }
+            
+            onResponse(result, account)
+        
+        }
+        self.send(message) { result in
             guard
                 let eth_requestAccountsIndex = initialActions?.firstIndex(where: { $0.method == "eth_requestAccounts" }),
                 let content = try? result.get().content,

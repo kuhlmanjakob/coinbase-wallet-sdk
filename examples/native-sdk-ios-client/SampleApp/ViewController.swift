@@ -14,10 +14,11 @@ class ViewController: UITableViewController {
     @IBOutlet weak var isConnectedLabel: UILabel!
     @IBOutlet weak var ownPubKeyLabel: UILabel!
     @IBOutlet weak var peerPubKeyLabel: UILabel!
-    
     @IBOutlet weak var logTextView: UITextView!
     
     private let cbwallet = CoinbaseWalletSDK.shared
+    private var address: String?
+    
     private var address: String?
     
     override func viewDidLoad() {
@@ -44,6 +45,10 @@ class ViewController: UITableViewController {
                 self.address = account.address
                 self.log("Address: \(self.address!)")
                 
+                guard let returnValue = response.content.first,
+                      case .result(value: let address) = returnValue else { break }
+                self.address = address
+                self.log("Address: \(address)")
             case .failure(let error):
                 self.log("\(error)")
             }
@@ -67,7 +72,12 @@ class ViewController: UITableViewController {
 //              , account: Account(chain: "eth", networkId: 1, address: self.address)
             )
         ) { result in
-            self.log("\(result)")
+            switch result {
+            case .success(let response):
+                self.logObject(response)
+            case .failure(let error):
+                self.log("\(error)")
+            }
         }
     }
     

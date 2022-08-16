@@ -9,10 +9,10 @@ import Foundation
 import CryptoKit
 
 @available(iOS 13.0, *)
-public typealias Message<C> = BaseMessage<C> where C: UnencryptedContent
+public typealias Message<C> = CodableMessage<C> where C: UnencryptedContent
 
 @available(iOS 13.0, *)
-public protocol UnencryptedContent: BaseContent {
+public protocol UnencryptedContent: CodableContent {
     associatedtype Encrypted: EncryptedContent where Encrypted.Unencrypted == Self
     
     func encrypt(with symmetricKey: SymmetricKey?) throws -> Encrypted
@@ -20,11 +20,10 @@ public protocol UnencryptedContent: BaseContent {
 
 // MARK: - base types
 
-public protocol BaseContent: Codable {}
-extension Array : BaseContent where Element : BaseContent {}
+public protocol BaseContent {}
 
 @available(iOS 13.0, *)
-public struct BaseMessage<C: BaseContent>: Codable {
+public struct BaseMessage<C: BaseContent> {
     public let uuid: UUID
     public let sender: CoinbaseWalletSDK.PublicKey
     public let content: C
@@ -40,4 +39,25 @@ public struct BaseMessage<C: BaseContent>: Codable {
             timestamp: orig.timestamp
         )
     }
+    
+#warning("for sample wallet app only. won't be available on actual release")
+    public init(uuid: UUID, sender: CoinbaseWalletSDK.PublicKey, content: C, version: String, timestamp: Date) {
+        self.uuid = uuid
+        self.sender = sender
+        self.content = content
+        self.version = version
+        self.timestamp = timestamp
+    }
 }
+
+// MARK: - codable types
+
+@available(iOS 13.0, *)
+extension BaseMessage: Codable where C: Codable {}
+
+public protocol CodableContent: BaseContent, Codable {}
+extension Array: BaseContent where Element: BaseContent {}
+extension Array: CodableContent where Element: CodableContent {}
+
+@available(iOS 13.0, *)
+public typealias CodableMessage<C> = BaseMessage<C> where C: CodableContent

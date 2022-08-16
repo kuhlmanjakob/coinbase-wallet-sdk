@@ -13,7 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UIApplication.swizzleOpenURL()
         
+        #warning("Should use universal links in production")
         CoinbaseWalletSDK.configure(
+            host: URL(string: "samplewallet://wsegue")!,
             callback: URL(string: "myappxyz://mycallback")!
         )
         
