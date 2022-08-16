@@ -19,8 +19,6 @@ class ViewController: UITableViewController {
     private let cbwallet = CoinbaseWalletSDK.shared
     private var address: String?
     
-    private var address: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         isCBWalletInstalledLabel.text = "\(CoinbaseWalletSDK.isCoinbaseWalletInstalled())"

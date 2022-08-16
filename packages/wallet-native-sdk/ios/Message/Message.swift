@@ -39,15 +39,6 @@ public struct BaseMessage<C: BaseContent> {
             timestamp: orig.timestamp
         )
     }
-    
-#warning("for sample wallet app only. won't be available on actual release")
-    public init(uuid: UUID, sender: CoinbaseWalletSDK.PublicKey, content: C, version: String, timestamp: Date) {
-        self.uuid = uuid
-        self.sender = sender
-        self.content = content
-        self.version = version
-        self.timestamp = timestamp
-    }
 }
 
 // MARK: - codable types

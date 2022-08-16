@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         #warning("Should use universal links in production")
         CoinbaseWalletSDK.configure(
-            host: URL(string: "samplewallet://wsegue")!,
             callback: URL(string: "myappxyz://mycallback")!
         )
         
