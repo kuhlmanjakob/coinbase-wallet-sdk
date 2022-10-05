@@ -6184,9 +6184,10 @@ pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-preact@^10.5.9:
-  version "10.5.15"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.15.tgz#6df94d8afecf3f9e10a742fd8c362ddab464225f"
+preact@^10.11.0:
+  version "10.11.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.11.1.tgz#35fdad092de8b2ad29df3a0bef9af1f4fdd2256b"
+  integrity sha512-1Wz5PCRm6Fg+6BTXWJHhX4wRK9MZbZBHuwBqfZlOdVm2NqPe8/rjYpufvYCwJSGb9layyzB2jTTXfpCTynLqFQ==
 
 prelude-ls@^1.2.1:
   version "1.2.1"
