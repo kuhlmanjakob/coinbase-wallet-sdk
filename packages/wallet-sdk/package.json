@@ -47,7 +47,7 @@
     "bind-decorator": "^1.0.11",
     "bn.js": "^5.1.1",
     "buffer": "^6.0.3",
-    "clsx": "^1.1.0",
+    "clsx": "^1.2.1",
     "eth-block-tracker": "4.4.3",
     "eth-json-rpc-filters": "4.2.2",
     "eth-rpc-errors": "4.0.2",
